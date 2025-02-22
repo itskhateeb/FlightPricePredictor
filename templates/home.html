@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Price Prediction</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="static/css/styles.css">
+
+    <style>
+        /* Custom Styles */
+        body {
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+        }
+
+        .navbar {
+            background: #343a40;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #fff !important;
+        }
+
+        .container {
+            margin-top: 100px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #343a40;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            background: #fff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .form-control {
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #6c757d, #5a6268);
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            border-radius: 10px;
+            color: #fff;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #5a6268, #4a5258);
+            transform: translateY(-3px);
+        }
+
+        .prediction-text {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #28a745;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            margin-top: 3rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        /* Animation for form elements */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            animation: fadeIn 0.6s ease-out;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">FLIGHT PRICE PREDICTION</a>
+        </div>
+    </nav>
+
+    <br><br><br>
+
+    <!-- Main Container -->
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Flight Price Prediction</h1>
+
+        <form action="\predict" method="post">
+            <div class="row">
+                <!-- Departure Date -->
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Departure Date</h5>
+                            <input type="datetime-local" class="form-control" name="Dep_Time" id="Dep_Time" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Arrival Date -->
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Arrival Date</h5>
+                            <input type="datetime-local" class="form-control" name="Arrival_Time" id="Arrival_Time" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Source -->
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Source</h5>
+                            <select class="form-control" name="Source" id="Source" required>
+                                <option value="Delhi">Delhi</option>
+                                <option value="Kolkata">Kolkata</option>
+                                <option value="Mumbai">Mumbai</option>
+                                <option value="Chennai">Chennai</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Destination -->
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Destination</h5>
+                            <select class="form-control" name="Destination" id="Destination" required>
+                                <option value="Cochin">Cochin</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="New Delhi">New Delhi</option>
+                                <option value="Hyderabad">Hyderabad</option>
+                                <option value="Kolkata">Kolkata</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Stops -->
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Stops</h5>
+                            <select class="form-control" name="stops" required>
+                                <option value="0">Non-Stop</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Airline -->
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Airline</h5>
+                            <select class="form-control" name="airline" id="airline" required>
+                                <option value="Jet Airways">Jet Airways</option>
+                                <option value="IndiGo">IndiGo</option>
+                                <option value="Air India">Air India</option>
+                                <option value="Multiple carriers">Multiple carriers</option>
+                                <option value="SpiceJet">SpiceJet</option>
+                                <option value="Vistara">Vistara</option>
+                                <option value="Air Asia">Air Asia</option>
+                                <option value="GoAir">GoAir</option>
+                                <option value="Multiple carriers Premium economy">Multiple carriers Premium economy</option>
+                                <option value="Jet Airways Business">Jet Airways Business</option>
+                                <option value="Vistara Premium economy">Vistara Premium economy</option>
+                                <option value="Trujet">Trujet</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center">
+                <button type="submit" class="btn btn-secondary btn-lg">Predict Price</button>
+            </div>
+        </form>
+
+        <!-- Prediction Result -->
+        <div class="text-center mt-5">
+            <h3 class="prediction-text">{{ prediction_text }}</h3>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-5">
+            <p>©2025 Khateeb Ur Rahman</p>
+        </footer>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        // Add smooth scrolling to the page
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add animation to the prediction result
+        const predictionText = document.querySelector('.prediction-text');
+        if (predictionText) {
+            predictionText.style.opacity = '0';
+            setTimeout(() => {
+                predictionText.style.transition = 'opacity 1s ease';
+                predictionText.style.opacity = '1';
+            }, 500);
+        }
+    </script>
+</body>
+
+</html>
